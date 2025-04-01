@@ -5,11 +5,12 @@ Python3.13.0
 
 """
 
-import gc
+# 各ライブラリのインポート
+import gc # ガーベジコレクション
 import psutil
 import time
-import schedule
-import os
+import schedule 
+import os # プロセッションを終了するため
 
 def release_memory(threshold=65):
     """
@@ -50,18 +51,18 @@ def release_memory(threshold=65):
     except Exception as e:
         print(f"エラーが発生しました: {e}")
 
-# def main():
-#     """
-#     メイン関数。メモリ解放をスケジュールする。
-#     """
-#     print("メモリ解放スクリプトを開始します...")
+def main():
+    """
+    メイン関数。メモリ解放をスケジュールする。
+    """
+    print("メモリ解放スクリプトを開始します...")
 
     # メモリ解放をスケジュール（例：5分ごとに実行）
-#     schedule.every(5).minutes.do(release_memory)
+    schedule.every(5).minutes.do(release_memory)
 
-#     while True:
-#         schedule.run_pending()
-#         time.sleep(1)  # 1秒ごとにスケジュールを確認
+    while True:
+        schedule.run_pending()
+        time.sleep(1)  # 1秒ごとにスケジュールを確認
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()

@@ -7,14 +7,13 @@ streamlit run "ファイル名".py
 '''
 
 # 各ライブラリのインポート
-import time
-import re
+import time 
+import re # 正規表現
 import gc # ガーベジコレクション
-import psutil
-import streamlit as st
+import psutil # プロセッション
+import streamlit as st # ストリームリット
 import schedule # スケジュール実行
-# メモリ解放(外部ライブラリとして作成)
-import release_memory 
+import release_memory # メモリ解放(外部ライブラリとして作成)
 import threading
 import atexit
 from langchain_community.llms import LlamaCpp
@@ -43,7 +42,7 @@ def load_model(model_path):
 
 # モデルを使用して回答を生成
 def generate_response(llm, text):
-    # プロンプト
+    # プロンプト (例)
     prompt_template= (
         "あなたは誠実かつ優秀な日本人女性のアシスタントです。"
         "指示がない限り常に日本語で回答し、かつ詳細に回答してください。"
@@ -149,12 +148,12 @@ def main():
     st.write(f"CPU使用率: {st.session_state.cpu_usage:.2f} %")
 
 # メモリ解放をスケジュールする関数
-def schedule_memory_release():
+# def schedule_memory_release():
     # メモリ解放をスケジュール（例：5分ごとに実行）
-    schedule.every(5).minutes.do(release_memory.release_memory, threshold=65)
-    while not stop_event.is_set():
-        schedule.run_pending()
-        time.sleep(1)  # 1秒ごとにスケジュールを確認
+    # schedule.every(5).minutes.do(release_memory.release_memory, threshold=65)
+    # while not stop_event.is_set():
+        # schedule.run_pending()
+        # time.sleep(1)  # 1秒ごとにスケジュールを確認
         
 # スレッドを停止させるためのイベント
 stop_event = threading.Event()
@@ -168,7 +167,7 @@ def stop_mamory_release():
 
 if __name__ == "__main__":    
     # メモリ解放をスレッドで実行
-    memory_thread = threading.Thread(target=schedule_memory_release)
+    memory_thread = threading.Thread(target=release_memory.release_memory)
     memory_thread.start()
     # プログラム終了時にスレッドを停止する関数を登録
     atexit.register(stop_mamory_release)

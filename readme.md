@@ -5,7 +5,7 @@
 
 ＜ 構成 ＞
 test_LlamaCpp.py：本体
-release_memory.py：外部モジュール
+release_memory.py：メモリ解放ライブラリ
 readme.md：このファイル
 LLMモデルはユーザー自身で用意してください!!
 
@@ -30,6 +30,10 @@ https://goodsystem.jp/ai/local-llm-easy-setup-ai-chatbot-how-to.html
   1：レスポンス時間
   2：メモリー使用量
   3：CPU使用率
+
+2025.04.01
+・メモリ解放コードが二重で実行される問題を修正
+
 
 細かい部分は各自で調整してみてください😊
 
